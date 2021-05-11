@@ -1,17 +1,29 @@
 const app = new Vue({
     el:'#app',
     data:{
-        randomMail: []
+        randomMail: [],
+        loading: false,
     },
     mounted(){
 
-        const self = this;
+        const ajaxMail = [];
+        const loopTimes = 10; 
+
+        this.loading = true;
 
         for(let i = 0; i < 10; i++){
 
             axios.get("https://flynn.boolean.careers/exercises/api/random/mail")
-                .then(function (risposta){
-            self.randomMail.push(risposta.data.response)
+                .then((risposta) => {
+                    setTimeout(() => {
+                        ajaxMail.push(risposta.data.response);
+
+                        if(ajaxMail.length === loopTimes){
+                            this.randomMail.push(...ajaxMail);
+                            this.loading = false
+                        }
+                    }, Math.ceil(Math.random() * 3000));
+            
 
             });
         }

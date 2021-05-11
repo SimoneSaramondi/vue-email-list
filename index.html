@@ -16,11 +16,13 @@
     <div id="app">
 
 
-        <ul>
+        <ul v-if="loading === false">
             <li v-for="num in randomMail">
                <h1>{{num}}</h1>
             </li>
         </ul>
+
+        <p v-else="loading === true">Loading...</p>
 
     </div>
     <script src="script.js"></script>
