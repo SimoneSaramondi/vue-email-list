@@ -16,14 +16,14 @@ const app = new Vue({
             axios.get("https://flynn.boolean.careers/exercises/api/random/mail")
                 .then((risposta) => {
                     setTimeout(() => {
+                        // Per mostrare tutte le mail contemporaneamente lo inserisco in un array "d'attesa"
                         ajaxMail.push(risposta.data.response);
 
                         if(ajaxMail.length === loopTimes){
                             this.randomMail.push(...ajaxMail);
                             this.loading = false
                         }
-                    }, Math.ceil(Math.random() * 3000));
-            
+                    }, Math.ceil(Math.random() * 3000));           
 
             });
         }
